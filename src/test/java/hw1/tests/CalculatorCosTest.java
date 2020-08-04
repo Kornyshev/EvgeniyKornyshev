@@ -9,7 +9,8 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class CalculatorCosTest extends CommonConditions {
 
-    @Test(dataProvider = "CorrectIntTestData", dataProviderClass = DataProviderForCalc.class, enabled = false)
+    @Test(dataProvider = "CorrectIntTestData",
+            dataProviderClass = DataProviderForCalc.class, enabled = false)
     public void testCos(double angle) {
         double expected = Math.cos(angle);
         /*

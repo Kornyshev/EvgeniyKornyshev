@@ -9,7 +9,8 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class CalculatorSinTest extends CommonConditions {
 
-    @Test(dataProvider = "CorrectIntTestData", dataProviderClass = DataProviderForCalc.class)
+    @Test(dataProvider = "CorrectIntTestData",
+            dataProviderClass = DataProviderForCalc.class)
     public void testSin(double angle) {
         double expected = Math.sin(angle);
         assertThat(calculator.sin(angle), equalTo(expected));
