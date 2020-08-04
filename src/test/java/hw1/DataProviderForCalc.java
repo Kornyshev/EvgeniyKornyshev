@@ -8,8 +8,8 @@ public class DataProviderForCalc {
 
     @DataProvider(name = "CorrectIntTestData")
     public static Object[][] getCorrectIntData(Method method) {
-        if (method.getName().equalsIgnoreCase("testSin") ||
-                method.getName().equalsIgnoreCase("testCos")) {
+        if (method.getName().equalsIgnoreCase("testSin")
+                || method.getName().equalsIgnoreCase("testCos")) {
             return new Object[][]{
                     {30.0}, {45.0}, {90.0}
             };
