@@ -27,26 +27,27 @@ public class CommonTest {
 
     @Test
     public void testMainPageTitle() {
-        //Assert browser title
+        //2. Assert Browser title
         assertThat(driver.getTitle(), equalTo("Home Page"));
     }
 
     @Test(priority = 1, dataProvider = "TestUserData",
             dataProviderClass = TestData.class)
     public void testMainPageLoggedIn(String userName, String pass) {
-        //Log in system as Test user
+        //3. Perform login
         driver.findElement(By.cssSelector("div.profile-photo")).click();
         driver.findElement(By.cssSelector("input#name")).sendKeys(userName);
         driver.findElement(By.cssSelector("input#password")).sendKeys(pass);
         driver.findElement(By.cssSelector("button#login-button")).click();
 
-        //Assert user name in top-right corner of the page
+        //4. Assert User name in the left-top side of
+        //screen that user is loggined
         String actualUserName = driver.findElement(
                 By.cssSelector("span#user-name")).getText();
         assertThat(actualUserName, equalTo("ROMAN IOVLEV"));
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
         driver.quit();
     }
