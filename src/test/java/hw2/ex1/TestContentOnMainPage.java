@@ -1,9 +1,11 @@
 package hw2.ex1;
 
+import hw2.CommonTest;
 import hw2.data.TestData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -16,50 +18,52 @@ public class TestContentOnMainPage extends CommonTest {
 
     String windowHandle;
 
-    @Test(priority = 20)
+    @Test(priority = 2)
     public void testLoggedMainPageTitle() {
         //Assert browser title when we are logged in
         assertThat(driver.getTitle(), equalTo("Home Page"));
     }
 
-    @Test(priority = 30)
+    @Test(priority = 3)
     public void testHeaderLinksText() {
         //Finding all links from header
-        WebElement homeLink = driver.findElement
-                (By.xpath("//a[text()='Home']"));
-        WebElement contactFormLink = driver.findElement
-                (By.xpath("//a[text()='Contact form']"));
-        WebElement serviceLink = driver.findElement
-                (By.xpath("//a[contains(text(), 'Service')]"));
-        WebElement metalsAndColorsLink = driver.findElement
-                (By.xpath("//a[text()='Metals & Colors']"));
+        final WebElement homeLink = driver.findElement(
+                By.xpath("//a[text()='Home']"));
+        final WebElement contactFormLink = driver.findElement(
+                By.xpath("//a[text()='Contact form']"));
+        final WebElement serviceLink = driver.findElement(
+                By.xpath("//a[contains(text(), 'Service')]"));
+        final WebElement metalsAndColorsLink = driver.findElement(
+                By.xpath("//a[text()='Metals & Colors']"));
 
         //Assert their visibility
-        assertTrue(homeLink.isDisplayed());
-        assertTrue(contactFormLink.isDisplayed());
-        assertTrue(serviceLink.isDisplayed());
-        assertTrue(metalsAndColorsLink.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(homeLink.isDisplayed());
+        softAssert.assertTrue(contactFormLink.isDisplayed());
+        softAssert.assertTrue(serviceLink.isDisplayed());
+        softAssert.assertTrue(metalsAndColorsLink.isDisplayed());
 
         //Assert header's links texts
-        assertThat(homeLink.getText(), equalTo("HOME"));
-        assertThat(contactFormLink.getText(), equalTo("CONTACT FORM"));
-        assertThat(serviceLink.getText(), equalTo("SERVICE"));
-        assertThat(metalsAndColorsLink.getText(), equalTo("METALS & COLORS"));
+        softAssert.assertEquals(homeLink.getText(), "HOME");
+        softAssert.assertEquals(contactFormLink.getText(), "CONTACT FORM");
+        softAssert.assertEquals(serviceLink.getText(), "SERVICE");
+        softAssert.assertEquals(metalsAndColorsLink.getText(), "METALS & COLORS");
+        softAssert.assertAll();
     }
 
-    @Test(priority = 40, dataProvider = "ExpectedTextBelowImages",
+    @Test(priority = 4, dataProvider = "ExpectedTextBelowImages",
             dataProviderClass = TestData.class)
-    public void testFourImagesAndTextBelowThem
-            (String s1, String s2, String s3, String s4) {
+    public void testFourImagesAndTextBelowThem(
+            String s1, String s2, String s3, String s4) {
         //Assert that all four images are displayed
-        List<WebElement> imagesOnMainPage = driver.findElements(
+        final List<WebElement> imagesOnMainPage = driver.findElements(
                 By.cssSelector("div.benefit-icon"));
         for (WebElement image : imagesOnMainPage) {
             assertTrue(image.isDisplayed());
         }
 
         //Asserting all texts below images
-        List<WebElement> textsBelowImages = driver.findElements(
+        final List<WebElement> textsBelowImages = driver.findElements(
                 By.cssSelector("span.benefit-txt"));
         assertThat(textsBelowImages.size(), is(4));
         assertThat(textsBelowImages.get(0).getText(), equalTo(s1));
@@ -68,20 +72,20 @@ public class TestContentOnMainPage extends CommonTest {
         assertThat(textsBelowImages.get(3).getText(), equalTo(s4));
     }
 
-    @Test(priority = 50, dataProvider = "ExpectedTextOfMainCenterTitles",
+    @Test(priority = 5, dataProvider = "ExpectedTextOfMainCenterTitles",
             dataProviderClass = TestData.class)
-    public void testMainHeadersOnThePage
-            (String expectedTitle, String expectedText) {
+    public void testMainHeadersOnThePage(
+            String expectedTitle, String expectedText) {
         //Assert Main center title and text below that one
-        WebElement mainTitle = driver.findElement(
+        final WebElement mainTitle = driver.findElement(
                 By.cssSelector("h3.main-title.text-center"));
-        WebElement textBelowTitle = driver.findElement(
+        final WebElement textBelowTitle = driver.findElement(
                 By.cssSelector("p.main-txt.text-center"));
         assertThat(mainTitle.getText(), equalTo(expectedTitle));
         assertThat(textBelowTitle.getText(), equalTo(expectedText));
     }
 
-    @Test(priority = 60)
+    @Test(priority = 6)
     public void testFramesAreExistAndLogoInFrame() {
         //Assert that there are four frames on the page
         windowHandle = driver.getWindowHandle();
@@ -94,16 +98,16 @@ public class TestContentOnMainPage extends CommonTest {
         driver.switchTo().parentFrame();
     }
 
-    @Test(priority = 70)
+    @Test(priority = 7)
     public void testFocusOnOriginalWindow() {
         //Assert that current Window handle is equal to saved handle
         assertThat(driver.getWindowHandle(), equalTo(windowHandle));
     }
 
-    @Test(priority = 80)
+    @Test(priority = 8)
     public void testTextAndLinkOfSubHeader() {
         //Assert link on JDI GitHub
-        WebElement jdiGitHubLink = driver.findElement(
+        final WebElement jdiGitHubLink = driver.findElement(
                 By.cssSelector("h3.text-center a"));
         String expectedUrl = "https://github.com/epam/JDI";
         assertThat(jdiGitHubLink.getText(), equalTo("JDI GITHUB"));
@@ -111,12 +115,12 @@ public class TestContentOnMainPage extends CommonTest {
                 equalTo(expectedUrl));
     }
 
-    @Test(priority = 90)
+    @Test(priority = 9)
     public void testLeftSectionAndFooterAreExist() {
         //Assert that left section and footer are displayed
-        WebElement leftSection = driver.findElement(
+        final WebElement leftSection = driver.findElement(
                 By.cssSelector("div[name='navigation-sidebar']"));
-        WebElement footer = driver.findElement(
+        final WebElement footer = driver.findElement(
                 By.cssSelector("div.footer-content.overflow"));
         assertTrue(leftSection.isDisplayed());
         assertTrue(footer.isDisplayed());

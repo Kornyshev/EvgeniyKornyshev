@@ -116,9 +116,6 @@
         </profile>
         <profile>
             <id>sumSubtract</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <build>
                 <plugins>
                     <plugin>

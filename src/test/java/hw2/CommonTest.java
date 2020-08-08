@@ -1,4 +1,4 @@
-package hw2.ex1;
+package hw2;
 
 import hw2.data.TestData;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class CommonTest {
 
-    WebDriver driver;
+    protected WebDriver driver;
 
     @BeforeClass
     public void setUp() {
@@ -31,7 +31,7 @@ public class CommonTest {
         assertThat(driver.getTitle(), equalTo("Home Page"));
     }
 
-    @Test(priority = 10, dataProvider = "TestUserData",
+    @Test(priority = 1, dataProvider = "TestUserData",
             dataProviderClass = TestData.class)
     public void testMainPageLoggedIn(String userName, String pass) {
         //Log in system as Test user
@@ -41,8 +41,8 @@ public class CommonTest {
         driver.findElement(By.cssSelector("button#login-button")).click();
 
         //Assert user name in top-right corner of the page
-        String actualUserName = driver.findElement
-                (By.cssSelector("span#user-name")).getText();
+        String actualUserName = driver.findElement(
+                By.cssSelector("span#user-name")).getText();
         assertThat(actualUserName, equalTo("ROMAN IOVLEV"));
     }
 
