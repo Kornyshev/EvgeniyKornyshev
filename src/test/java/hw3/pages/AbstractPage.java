@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-abstract class AbstractPage {
+public abstract class AbstractPage {
 
     protected HeaderMenu headerMenu;
     protected WebDriver driver;

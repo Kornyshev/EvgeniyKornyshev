@@ -1,17 +1,12 @@
 package hw3.tests.ex2;
 
-import hw3.data.SelectColor;
 import hw3.data.TestData;
 import hw3.pages.DifferentElementsPage;
 import hw3.tests.CommonTest;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static hw3.tests.steps.DifferentElementsPageSteps.*;
+import static hw3.tests.steps.LoggedMainPageSteps.*;
 
 public class TestServiceTabAndElements extends CommonTest {
 
@@ -21,66 +16,48 @@ public class TestServiceTabAndElements extends CommonTest {
     public void testServiceDropdownInHeader() {
         //5. Click on Service subcategory in the header and
         //check that drop down contains options
-        SoftAssert softly = new SoftAssert();
-        for (WebElement el : loggedInMainPage.getServiceHeaderDropdown()) {
-            softly.assertTrue(el.isDisplayed());
-        }
-        softly.assertAll();
+        checkServiceDropdownInHeader(loggedInMainPage);
     }
 
     @Test(priority = 11)
     public void testServiceDropdownInSidebar() {
         //6. Click on Service subcategory in the left section
         //and check that drop down contains options
-        SoftAssert softly = new SoftAssert();
-        for (WebElement el : loggedInMainPage.getServiceSidebarDropdown()) {
-            softly.assertTrue(el.isDisplayed());
-        }
-        softly.assertAll();
+        checkServiceDropdownInSidebar(loggedInMainPage);
     }
 
     @Test(priority = 12)
     public void testDifferentElementsPageIsOpened() {
         //7. Open through the header menu Service - Different Elements Page
-        elementsPage = loggedInMainPage.clickDiffElementsPageLink();
-        assertThat(elementsPage.getTitle(),
-                equalTo(DIFF_ELEM_PAGE_TITLE));
+        elementsPage = navigateToDiffElementsUsingHeader(loggedInMainPage);
+        checkThatMainTitleIsCorrect(elementsPage, DIFF_ELEM_PAGE_TITLE);
     }
 
     @Test(priority = 13)
     public void testAllElementsAreDisplayed() {
         //8. Check interface on Different elements page, it
         //contains all needed elements
-        SoftAssert softly = new SoftAssert();
-        for (WebElement el : elementsPage.getAllElements()) {
-            softly.assertTrue(el.isDisplayed());
-        }
-        softly.assertAll();
+        checkThatAllUiElementsAreExist(elementsPage);
     }
 
     @Test(priority = 14)
     public void testLogAreaIsDisplayed() {
         //9. Assert that there is Right Section
-        assertTrue(elementsPage.logAreaIsDisplayed());
+        checkThatLogAreaIsExist(elementsPage);
     }
 
     @Test(priority = 15)
     public void testNavigationBarIsDisplayed() {
         //10. Assert that there is Left Section
-        assertTrue(elementsPage.navigationBarIsDisplayed());
+        checkThatNavbarIsExist(elementsPage);
     }
 
     @Test(priority = 16)
     public void testWaterAndWindAreChecked() {
         //11. Select checkboxes
-        SoftAssert softly = new SoftAssert();
-        softly.assertFalse(elementsPage.components.waterIsChecked());
-        softly.assertFalse(elementsPage.components.windIsChecked());
-        elementsPage.components.clickWaterCheckbox();
-        elementsPage.components.clickWindCheckbox();
-        softly.assertTrue(elementsPage.components.waterIsChecked());
-        softly.assertTrue(elementsPage.components.windIsChecked());
-        softly.assertAll();
+        checkWaterAndWindAreUnchecked(elementsPage);
+        clickWaterAndWindCheckboxes(elementsPage);
+        checkWaterAndWindAreChecked(elementsPage);
     }
 
     @Test(priority = 17, dataProvider = "WaterWindAreChecked",
@@ -89,19 +66,14 @@ public class TestServiceTabAndElements extends CommonTest {
         //12. Assert that for each checkbox there is an
         //individual log row and value is corresponded to
         //the status of checkbox.
-        SoftAssert softly = new SoftAssert();
-        softly.assertTrue(elementsPage.components
-                .getActualLogs().get(0).getText().contains(wind));
-        softly.assertTrue(elementsPage.components
-                .getActualLogs().get(1).getText().contains(water));
-        softly.assertAll();
+        checkLogsAboutWaterWindChecking(elementsPage, water, wind);
     }
 
     @Test(priority = 18)
     public void testSelenRadioIsChecked() {
         //13. Select radio
-        elementsPage.components.setSelenRadio();
-        assertTrue(elementsPage.components.selenRadioIsChecked());
+        clickSelenRadioButton(elementsPage);
+        checkThatSelenRadioIsSelected(elementsPage);
     }
 
     @Test(priority = 19, dataProvider = "SelenRadioIsChecked",
@@ -110,15 +82,14 @@ public class TestServiceTabAndElements extends CommonTest {
         //14. Assert that for radiobutton there is a log row and
         //value is corresponded to the status of
         //radiobutton.
-        assertTrue(elementsPage.components
-                .getActualLogs().get(0).getText().contains(selen));
+        checkLogsAboutSelenRadioSelection(elementsPage, selen);
     }
 
     @Test(priority = 20)
     public void testYellowColorIsSelected() {
         //15. Select in dropdown
-        elementsPage.components.selectColor(SelectColor.YELLOW);
-        assertEquals(elementsPage.components.getFirstSelectedColor(), "Yellow");
+        selectYellowInDropdown(elementsPage);
+        checkThatYellowWasSelected(elementsPage);
     }
 
     @Test(priority = 21, dataProvider = "YellowIsChecked",
@@ -126,21 +97,15 @@ public class TestServiceTabAndElements extends CommonTest {
     public void testColorSelectionInLogs(String yellow) {
         //16. Assert that for dropdown there is a log row and
         //value is corresponded to the selected value.
-        assertTrue(elementsPage.components
-                .getActualLogs().get(0).getText().contains(yellow));
+        checkLogsAboutYellowSelection(elementsPage, yellow);
     }
 
     @Test(priority = 22)
     public void testWaterAndWindUnchecking() {
         //17. Unselect and assert checkboxes
-        SoftAssert softly = new SoftAssert();
-        softly.assertTrue(elementsPage.components.waterIsChecked());
-        softly.assertTrue(elementsPage.components.windIsChecked());
-        elementsPage.components.clickWaterCheckbox();
-        elementsPage.components.clickWindCheckbox();
-        softly.assertFalse(elementsPage.components.waterIsChecked());
-        softly.assertFalse(elementsPage.components.windIsChecked());
-        softly.assertAll();
+        checkWaterAndWindAreChecked(elementsPage);
+        clickWaterAndWindCheckboxes(elementsPage);
+        checkWaterAndWindAreUnchecked(elementsPage);
     }
 
     @Test(priority = 23, dataProvider = "WaterWindAreUnchecked",
@@ -149,11 +114,6 @@ public class TestServiceTabAndElements extends CommonTest {
         //18. Assert that for each checkbox there is an
         //individual log row and value is corresponded to
         //the status of checkbox.
-        SoftAssert softly = new SoftAssert();
-        softly.assertTrue(elementsPage.components
-                .getActualLogs().get(0).getText().contains(wind));
-        softly.assertTrue(elementsPage.components
-                .getActualLogs().get(1).getText().contains(water));
-        softly.assertAll();
+        checkLogsAboutWaterWindUnchecking(elementsPage, water, wind);
     }
 }

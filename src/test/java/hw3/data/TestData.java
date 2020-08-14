@@ -2,6 +2,8 @@ package hw3.data;
 
 import org.testng.annotations.DataProvider;
 
+import java.util.Arrays;
+
 public class TestData {
     @DataProvider(name = "ExpectedUsername")
     public Object[][] getTestUserData() {
@@ -13,14 +15,14 @@ public class TestData {
     @DataProvider(name = "ExpectedLinksText")
     public Object[][] getLinksText() {
         return new Object[][]{
-                {"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"}
+                {Arrays.asList("HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS")}
         };
     }
 
     @DataProvider(name = "ExpectedTextBelowImages")
     public Object[][] getExpectedTextBelowImages() {
         return new Object[][]{
-                {"To include good practices\n"
+                {Arrays.asList("To include good practices\n"
                         + "and ideas from successful\n"
                         + "EPAM project",
                         "To be flexible and\n"
@@ -29,7 +31,7 @@ public class TestData {
                         "Already have good base\n"
                                 + "(about 20 internal and\n"
                                 + "some external projects),\n"
-                                + "wish to get more…"}
+                                + "wish to get more…")}
         };
     }
 
