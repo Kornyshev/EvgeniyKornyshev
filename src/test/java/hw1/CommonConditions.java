@@ -10,12 +10,10 @@ public class CommonConditions {
 
     @BeforeClass
     public void setUp() {
-        System.out.println(this.getClass() + " <- @BeforeClass");
         calculator = new Calculator();
     }
 
     @AfterClass
     public void tearDown() {
-        System.out.println(this.getClass() + " <- @AfterClass");
     }
 }

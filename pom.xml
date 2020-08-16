@@ -19,14 +19,15 @@
         <selenium-java.version>3.141.59</selenium-java.version>
         <webdrivermanager.version>4.1.0</webdrivermanager.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
 
         <!--XML TEST SUITS-->
         <all-test-xml-file>src/test/resources/allTests.xml</all-test-xml-file>
         <sum-subtract-xml-file>src/test/resources/sumSubtract.xml</sum-subtract-xml-file>
         <multiply-divide-xml-file>src/test/resources/multiplyDivide.xml</multiply-divide-xml-file>
         <sin-cos-xml-file>src/test/resources/sinCos.xml</sin-cos-xml-file>
-
         <hw3-xml-file>src/test/resources/hw3.xml</hw3-xml-file>
+        <hw2-xml-file>src/test/resources/hw2.xml</hw2-xml-file>
     </properties>
 
     <dependencies>
@@ -70,7 +71,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven-checkstyle-plugin.version}</version>
                 <configuration>
                     <configLocation>
                         https://raw.githubusercontent.com/shoggy/epam-ru-pet-ta-2020-notes/master/checkstyle_config.xml
