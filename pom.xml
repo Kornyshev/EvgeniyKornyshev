@@ -26,6 +26,7 @@
         <sum-subtract-xml-file>src/test/resources/sumSubtract.xml</sum-subtract-xml-file>
         <multiply-divide-xml-file>src/test/resources/multiplyDivide.xml</multiply-divide-xml-file>
         <sin-cos-xml-file>src/test/resources/sinCos.xml</sin-cos-xml-file>
+        <hw3-xml-file>src/test/resources/hw3.xml</hw3-xml-file>
         <hw2-xml-file>src/test/resources/hw2.xml</hw2-xml-file>
     </properties>
 
@@ -95,7 +96,7 @@
 
     <profiles>
         <profile>
-            <id>hw2</id>
+            <id>hw3</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -107,7 +108,7 @@
                         <version>${maven-surefire-plugin.version}</version>
                         <configuration>
                             <suiteXmlFiles>
-                                <suiteXmlFile>${hw2-xml-file}</suiteXmlFile>
+                                <suiteXmlFile>${hw3-xml-file}</suiteXmlFile>
                             </suiteXmlFiles>
                         </configuration>
                     </plugin>
