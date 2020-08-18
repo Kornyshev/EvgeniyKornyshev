@@ -29,6 +29,7 @@
         <webdrivermanager.version>4.1.0</webdrivermanager.version>
 
         <hw4-xml-file>src/test/resources/hw4.xml</hw4-xml-file>
+        <commons-io.version>2.7</commons-io.version>
     </properties>
 
     <dependencies>
@@ -67,6 +68,12 @@
             <version>${slf4j-simple.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -84,6 +91,7 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>${hw4-xml-file}</suiteXmlFile>
                     </suiteXmlFiles>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
                 <dependencies>
                     <dependency>

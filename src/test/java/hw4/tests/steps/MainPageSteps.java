@@ -10,7 +10,7 @@ import static org.testng.Assert.assertEquals;
 
 public class MainPageSteps {
 
-    @Step(value = "Check that Main Title is correct")
+    @Step(value = "Checking that Main Title is correct")
     public static void checkThatMainTitleIsCorrect(AbstractPage page, String expected) {
         assertEquals(page.getTitle(), expected);
     }
@@ -20,7 +20,7 @@ public class MainPageSteps {
         return page.loginAs(UserCreator.createFromPropertiesFile());
     }
 
-    @Step(value = "Check that login was successful")
+    @Step(value = "Checking that login was successful")
     public static void checkThatUserLoggedInCorrectly(LoggedInMainPage page, String expected) {
         assertEquals(page.getUserName(), expected);
     }

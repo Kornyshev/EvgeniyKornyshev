@@ -20,7 +20,7 @@ public class TestServiceTabAndElements extends CommonTest {
 
     @Story(value = "Check that Service dropdown is correctly displayed")
     @Severity(value = SeverityLevel.CRITICAL)
-    @Test(priority = 10)
+    @Test(priority = 10, alwaysRun = true)
     public void testServiceDropdownInHeader() {
         //5. Click on Service subcategory in the header and
         //check that drop down contains options
@@ -29,7 +29,7 @@ public class TestServiceTabAndElements extends CommonTest {
 
     @Story(value = "Check that Service dropdown is correctly displayed")
     @Severity(value = SeverityLevel.CRITICAL)
-    @Test(priority = 11)
+    @Test(priority = 11, alwaysRun = true)
     public void testServiceDropdownInSidebar() {
         //6. Click on Service subcategory in the left section
         //and check that drop down contains options
@@ -38,7 +38,7 @@ public class TestServiceTabAndElements extends CommonTest {
 
     @Story(value = "Check that Different Elements page could be opened")
     @Severity(value = SeverityLevel.BLOCKER)
-    @Test(priority = 12)
+    @Test(priority = 12, alwaysRun = true)
     public void testDifferentElementsPageIsOpened() {
         //7. Open through the header menu Service - Different Elements Page
         elementsPage = navigateToDiffElementsUsingHeader(loggedInMainPage);
@@ -47,7 +47,7 @@ public class TestServiceTabAndElements extends CommonTest {
 
     @Story(value = "Check all elements on the page are displayed")
     @Severity(value = SeverityLevel.NORMAL)
-    @Test(priority = 13)
+    @Test(priority = 13, alwaysRun = true)
     public void testAllElementsAreDisplayed() {
         //8. Check interface on Different elements page, it
         //contains all needed elements
@@ -56,7 +56,7 @@ public class TestServiceTabAndElements extends CommonTest {
 
     @Story(value = "Check all elements on the page are displayed")
     @Severity(value = SeverityLevel.MINOR)
-    @Test(priority = 14)
+    @Test(priority = 14, alwaysRun = true)
     public void testLogAreaIsDisplayed() {
         //9. Assert that there is Right Section
         checkThatLogAreaIsExist(elementsPage);
@@ -64,7 +64,7 @@ public class TestServiceTabAndElements extends CommonTest {
 
     @Story(value = "Check all elements on the page are displayed")
     @Severity(value = SeverityLevel.NORMAL)
-    @Test(priority = 15)
+    @Test(priority = 15, alwaysRun = true)
     public void testNavigationBarIsDisplayed() {
         //10. Assert that there is Left Section
         checkThatNavbarIsExist(elementsPage);
@@ -72,7 +72,7 @@ public class TestServiceTabAndElements extends CommonTest {
 
     @Story(value = "Check interaction with checkboxes in direct way")
     @Severity(value = SeverityLevel.NORMAL)
-    @Test(priority = 16)
+    @Test(priority = 16, alwaysRun = true)
     public void testWaterAndWindAreChecked() {
         //11. Select checkboxes
         checkWaterAndWindAreUnchecked(elementsPage);
@@ -83,7 +83,8 @@ public class TestServiceTabAndElements extends CommonTest {
     @Story(value = "Check interaction with checkboxes in direct way")
     @Severity(value = SeverityLevel.NORMAL)
     @Test(priority = 17, dataProvider = "WaterWindAreChecked",
-            dataProviderClass = TestData.class)
+            dataProviderClass = TestData.class, alwaysRun = true,
+            dependsOnMethods = {"testWaterAndWindAreChecked"})
     public void testWaterWindCheckingInLogs(String water, String wind) {
         //12. Assert that for each checkbox there is an
         //individual log row and value is corresponded to
@@ -93,7 +94,7 @@ public class TestServiceTabAndElements extends CommonTest {
 
     @Story(value = "Check interaction with radio button")
     @Severity(value = SeverityLevel.NORMAL)
-    @Test(priority = 18)
+    @Test(priority = 18, alwaysRun = true)
     public void testSelenRadioIsChecked() {
         //13. Select radio
         clickSelenRadioButton(elementsPage);
@@ -103,7 +104,8 @@ public class TestServiceTabAndElements extends CommonTest {
     @Story(value = "Check interaction with radio button")
     @Severity(value = SeverityLevel.NORMAL)
     @Test(priority = 19, dataProvider = "SelenRadioIsChecked",
-            dataProviderClass = TestData.class)
+            dataProviderClass = TestData.class, alwaysRun = true,
+            dependsOnMethods = {"testSelenRadioIsChecked"})
     public void testSelenCheckingInLogs(String selen) {
         //14. Assert that for radiobutton there is a log row and
         //value is corresponded to the status of
@@ -113,7 +115,7 @@ public class TestServiceTabAndElements extends CommonTest {
 
     @Story(value = "Check interaction with select dropdown")
     @Severity(value = SeverityLevel.NORMAL)
-    @Test(priority = 20)
+    @Test(priority = 20, alwaysRun = true)
     public void testYellowColorIsSelected() {
         //15. Select in dropdown
         selectYellowInDropdown(elementsPage);
@@ -123,7 +125,8 @@ public class TestServiceTabAndElements extends CommonTest {
     @Story(value = "Check interaction with select dropdown")
     @Severity(value = SeverityLevel.NORMAL)
     @Test(priority = 21, dataProvider = "YellowIsChecked",
-            dataProviderClass = TestData.class)
+            dataProviderClass = TestData.class, alwaysRun = true,
+            dependsOnMethods = {"testYellowColorIsSelected"})
     public void testColorSelectionInLogs(String yellow) {
         //16. Assert that for dropdown there is a log row and
         //value is corresponded to the selected value.
@@ -132,7 +135,7 @@ public class TestServiceTabAndElements extends CommonTest {
 
     @Story(value = "Check interaction with checkboxes in opposite way")
     @Severity(value = SeverityLevel.NORMAL)
-    @Test(priority = 22)
+    @Test(priority = 22, alwaysRun = true)
     public void testWaterAndWindUnchecking() {
         //17. Unselect and assert checkboxes
         checkWaterAndWindAreChecked(elementsPage);
@@ -143,7 +146,8 @@ public class TestServiceTabAndElements extends CommonTest {
     @Story(value = "Check interaction with checkboxes in opposite way")
     @Severity(value = SeverityLevel.NORMAL)
     @Test(priority = 23, dataProvider = "WaterWindAreUnchecked",
-            dataProviderClass = TestData.class)
+            dataProviderClass = TestData.class, alwaysRun = true,
+            dependsOnMethods = {"testWaterAndWindUnchecking"})
     public void testWaterAndWindUncheckingInLogs(String water, String wind) {
         //18. Assert that for each checkbox there is an
         //individual log row and value is corresponded to
