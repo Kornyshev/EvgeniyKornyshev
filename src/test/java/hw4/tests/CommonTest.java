@@ -20,14 +20,14 @@ public class CommonTest {
 
     protected LoggedInMainPage loggedInMainPage;
     protected MainPage mainPage;
-    public static WebDriver driver;
-    //protected WebDriver driver;
-    protected static final String EXPECTED_MAIN_TITLE = "Home Page";
+    protected WebDriver driver;
+    protected static final String EXPECTED_MAIN_TITLE = "WRONG!!! Home Page";
     protected static final String DIFF_ELEM_PAGE_TITLE = " WRONG!!! Different Elements";
 
     @BeforeClass
     public void setUp(ITestContext context) {
         driver = DriverFactory.create();
+        context.setAttribute("driver", driver);
         mainPage = new MainPage(driver);
         mainPage.openPage();
     }
