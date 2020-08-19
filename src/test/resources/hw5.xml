@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test verbose="2" name="Sin and Cos">
+    <test verbose="2" name="HW5 - BDD approach">
         <classes>
-            <class name="hw1.tests.CalculatorCosTest"/>
-            <class name="hw1.tests.CalculatorSinTest"/>
+            <class name="hw5.tests.HW5RunnerClassIT"/>
         </classes>
     </test>
 </suite>
