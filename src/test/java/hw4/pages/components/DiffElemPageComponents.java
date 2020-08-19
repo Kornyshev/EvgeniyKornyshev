@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DiffElemPageComponents {
 
@@ -28,13 +29,13 @@ public class DiffElemPageComponents {
     @FindBy(css = "div.colors select")
     private WebElement colorSelect;
 
-    @FindBy(xpath = "//div[3]//label[4]//input[1]")
+    @FindBy(xpath = "//label[text()[contains(.,'Selen')]]//input")
     private WebElement selenRadio;
 
-    @FindBy(xpath = "//div//div//div//div[2]//label[1]//input[1]")
+    @FindBy(xpath = "//label[text()[contains(.,'Water')]]//input")
     private WebElement waterCheckbox;
 
-    @FindBy(xpath = "//div//div//div//div[2]//label[3]//input[1]")
+    @FindBy(xpath = "//label[text()[contains(.,'Wind')]]//input")
     private WebElement windCheckbox;
 
     @FindBy(css = "button[name='Default Button']")
@@ -75,8 +76,13 @@ public class DiffElemPageComponents {
         new Select(colorSelect).selectByVisibleText(color.getColor());
     }
 
-    public List<WebElement> getActualLogs() {
-        return logs;
+    public List<String> getActualLogsMessages() {
+        return logs
+                .stream()
+                .map(el -> {
+            int space = el.getText().indexOf(" ");
+            return el.getText().substring(space + 1); })
+                .collect(Collectors.toList());
     }
 
     public List<WebElement> allElementsOnPageForAssertion() {

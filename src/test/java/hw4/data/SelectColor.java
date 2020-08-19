@@ -6,7 +6,7 @@ public enum SelectColor {
     BLUE("Blue"),
     YELLOW("Yellow");
 
-    private String color;
+    private final String color;
 
     SelectColor(String color) {
         this.color = color;

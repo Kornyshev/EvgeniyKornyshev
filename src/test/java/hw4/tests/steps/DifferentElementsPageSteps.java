@@ -7,6 +7,9 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.testng.asserts.SoftAssert;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -61,23 +64,15 @@ public class DifferentElementsPageSteps {
     @Step(value = "Checking that Logs have records about checkbox selecting in proper order")
     public static void checkLogsAboutWaterWindChecking(
             DifferentElementsPage page, String water, String wind) {
-        SoftAssert softly = new SoftAssert();
-        softly.assertTrue(page.components
-                .getActualLogs().get(0).getText().contains(wind));
-        softly.assertTrue(page.components
-                .getActualLogs().get(1).getText().contains(water));
-        softly.assertAll();
+        assertThat(page.components.getActualLogsMessages().subList(0, 2),
+                contains(equalTo(wind), equalTo(water)));
     }
 
     @Step(value = "Checking that Logs have records about checkbox unselecting in proper order")
     public static void checkLogsAboutWaterWindUnchecking(
             DifferentElementsPage page, String water, String wind) {
-        SoftAssert softly = new SoftAssert();
-        softly.assertTrue(page.components
-                .getActualLogs().get(0).getText().contains(wind));
-        softly.assertTrue(page.components
-                .getActualLogs().get(1).getText().contains(water));
-        softly.assertAll();
+        assertThat(page.components.getActualLogsMessages().subList(0, 2),
+                contains(equalTo(wind), equalTo(water)));
     }
 
     @Step(value = "Click on Selen radio button")
@@ -93,7 +88,7 @@ public class DifferentElementsPageSteps {
     @Step(value = "Checking that Logs have records about radio button selecting in proper order")
     public static void checkLogsAboutSelenRadioSelection(DifferentElementsPage page, String log) {
         assertTrue(page.components
-                .getActualLogs().get(0).getText().contains(log));
+                .getActualLogsMessages().get(0).contains(log));
     }
 
     @Step(value = "Select Yellow color in dropdown")
@@ -109,6 +104,6 @@ public class DifferentElementsPageSteps {
     @Step(value = "Checking that Logs have records about color dropdown selecting in proper order")
     public static void checkLogsAboutYellowSelection(DifferentElementsPage page, String color) {
         assertTrue(page.components
-                .getActualLogs().get(0).getText().contains(color));
+                .getActualLogsMessages().get(0).contains(color));
     }
 }

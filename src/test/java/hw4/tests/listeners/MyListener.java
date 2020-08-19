@@ -9,17 +9,16 @@ import org.testng.ITestResult;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MyListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         WebDriver driver = (WebDriver) result.getTestContext().getAttribute("driver");
         File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            Allure.addAttachment("Something wrong with test on this page",
-                    new FileInputStream(srcFile));
-        } catch (FileNotFoundException e) {
+        try (FileInputStream fis = new FileInputStream(srcFile)) {
+            Allure.addAttachment("Something wrong with test on this page", fis);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
