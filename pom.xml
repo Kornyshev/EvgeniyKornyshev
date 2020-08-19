@@ -29,7 +29,6 @@
         <webdrivermanager.version>4.1.0</webdrivermanager.version>
 
         <hw4-xml-file>src/test/resources/hw4.xml</hw4-xml-file>
-        <commons-io.version>2.7</commons-io.version>
     </properties>
 
     <dependencies>
