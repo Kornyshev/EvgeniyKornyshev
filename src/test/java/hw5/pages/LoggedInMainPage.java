@@ -8,5 +8,7 @@ public class LoggedInMainPage extends AbstractPage {
         super(driver);
     }
 
-
+    public void clickOnHeaderMenuLink(String link) {
+        headerMenu.clickOnHeaderMenuLink(link);
+    }
 }

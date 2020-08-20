@@ -1,4 +1,4 @@
-package hw5.hooks;
+package hw5.tests.hooks;
 
 import hw5.context.Context;
 import hw5.driver.DriverCreator;
