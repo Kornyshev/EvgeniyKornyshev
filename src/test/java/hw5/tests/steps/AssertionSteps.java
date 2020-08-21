@@ -41,28 +41,29 @@ public class AssertionSteps {
         assertThat(actualTitle).isEqualTo(pageTitle);
     }
 
-    @Then("{int} Number Type Dropdowns should be displayed on Users Table on User Table page")
+    @Then("{int} Number(s) Type Dropdowns should be displayed on Users Table on User Table page")
     public void number_Type_Dropdowns_should_be_displayed_on_Users_Table_on_User_Table_page(
             Integer count) {
         int selectsCount = userTablePage.getSelectsCount();
         assertThat(selectsCount).isEqualTo(count);
     }
 
-    @Then("{int} Usernames should be displayed on Users Table on User Table page")
+    @Then("{int} Username(s) should be displayed on Users Table on User Table page")
     public void usernames_should_be_displayed_on_Users_Table_on_User_Table_page(Integer count) {
         int usernamesCount = userTablePage.getUsernamesCount();
         assertThat(usernamesCount).isEqualTo(count);
     }
 
-    @Then("{int} Description texts under images should be displayed "
+    @Then("{int} Description(s) texts under images should be displayed "
             + "on Users Table on User Table page")
-    public void description_texts_under_images_should_be_displayed_on_Users_Table_on_User_Table_page(
+    public void
+    description_texts_under_images_should_be_displayed_on_Users_Table_on_User_Table_page(
             Integer count) {
         int descriptionsCount = userTablePage.getDescriptionsCount();
         assertThat(descriptionsCount).isEqualTo(count);
     }
 
-    @Then("{int} checkboxes should be displayed on Users Table on User Table page")
+    @Then("{int} checkbox(es) should be displayed on Users Table on User Table page")
     public void checkboxes_should_be_displayed_on_Users_Table_on_User_Table_page(Integer count) {
         int checkboxesCount = userTablePage.getCheckboxesCount();
         assertThat(checkboxesCount).isEqualTo(count);

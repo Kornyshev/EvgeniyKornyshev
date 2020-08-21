@@ -9,9 +9,9 @@ Feature: User Table Page test
     When I click on 'Service' button in Header on the Main page
     And I click on 'User Table' button in Service dropdown on the Main page
     Then 'User Table' page should be opened
-    And 6 Number Type Dropdowns should be displayed on Users Table on User Table page
+    And 6 Numbers Type Dropdowns should be displayed on Users Table on User Table page
     And 6 Usernames should be displayed on Users Table on User Table page
-    And 6 Description texts under images should be displayed on Users Table on User Table page
+    And 6 Descriptions texts under images should be displayed on Users Table on User Table page
     And 6 checkboxes should be displayed on Users Table on User Table page
     And User table should contain following values:
       | Number | User             | Description                      |

@@ -10,15 +10,15 @@ import java.util.List;
 
 public class DifferentElementsPage extends AbstractPage {
 
-    public DifferentElementsPage(WebDriver driver) {
-        super(driver);
-    }
-
     @FindBy(css = "div.colors select")
     private WebElement colorSelect;
 
     @FindBy(css = "div.checkbox-row label")
     private List<WebElement> checkboxes;
+
+    public DifferentElementsPage(WebDriver driver) {
+        super(driver);
+    }
 
     public void clickOnCheckboxOrRadio(String elementText) {
         for (WebElement element : checkboxes) {

@@ -1,6 +1,5 @@
 package hw5.pages;
 
-import hw5.pages.composites.LogsList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -13,13 +12,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserTablePage extends AbstractPage {
-
-    public UserTablePage(WebDriver driver) {
-        super(driver);
-        logsList = new LogsList(driver);
-    }
-
-    private final LogsList logsList;
 
     @FindBy(css = "table#user-table tbody tr")
     private List<WebElement> usersCards;
@@ -36,9 +28,16 @@ public class UserTablePage extends AbstractPage {
     @FindBy(css = "table#user-table tbody tr div.user-descr input")
     private List<WebElement> allCheckboxes;
 
+    public UserTablePage(WebDriver driver) {
+        super(driver);
+    }
+
     private WebElement findConcreteUserCardOnPage(String username) {
         for (WebElement card : usersCards) {
-            if (card.findElements(By.tagName("th")).size() == 4) {
+            if (card.getText().contains("Number")
+                    && card.getText().contains("Type")
+                    && card.getText().contains("User")
+                    && card.getText().contains("Description")) {
                 continue;
             }
             if (card.findElement(By.cssSelector("a")).getText().equalsIgnoreCase(username)) {

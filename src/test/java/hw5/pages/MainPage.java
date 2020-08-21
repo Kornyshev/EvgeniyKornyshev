@@ -11,10 +11,6 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class MainPage extends AbstractPage {
 
-    public MainPage(WebDriver driver) {
-        super(driver);
-    }
-
     public static final String HOMEPAGE_URL = "https://jdi-testing.github.io/jdi-light/index.html";
 
     @FindBy(css = "div.profile-photo")
@@ -28,6 +24,10 @@ public class MainPage extends AbstractPage {
 
     @FindBy(css = "button#login-button")
     private WebElement loginButton;
+
+    public MainPage(WebDriver driver) {
+        super(driver);
+    }
 
     public MainPage openPage() {
         driver.get(HOMEPAGE_URL);
