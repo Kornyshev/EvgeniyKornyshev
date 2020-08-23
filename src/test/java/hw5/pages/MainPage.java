@@ -1,17 +1,17 @@
-package hw3.pages;
+package hw5.pages;
 
-import hw3.model.User;
+import hw5.context.User;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class MainPage extends AbstractPage {
 
     public static final String HOMEPAGE_URL = "https://jdi-testing.github.io/jdi-light/index.html";
-
-    public MainPage(WebDriver driver) {
-        super(driver);
-    }
 
     @FindBy(css = "div.profile-photo")
     private WebElement profileIcon;
@@ -25,16 +25,18 @@ public class MainPage extends AbstractPage {
     @FindBy(css = "button#login-button")
     private WebElement loginButton;
 
+    public MainPage(WebDriver driver) {
+        super(driver);
+    }
+
     public MainPage openPage() {
         driver.get(HOMEPAGE_URL);
         return this;
     }
 
-    public String getTitle() {
-        return driver.getTitle();
-    }
-
     public LoggedInMainPage loginAs(final User user) {
+        new WebDriverWait(driver, 10)
+                .until(visibilityOfElementLocated(By.cssSelector("div.profile-photo")));
         profileIcon.click();
         userNameField.sendKeys(user.getUsername());
         passwordField.sendKeys(user.getPassword());
