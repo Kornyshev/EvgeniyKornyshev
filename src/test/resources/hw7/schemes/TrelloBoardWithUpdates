@@ -1,0 +1,51 @@
+{
+  "id": "5f4bb1fb7555334d0653b896",
+  "name": "NewNameHW7",
+  "desc": "Such a cool experiance to use API in Trello",
+  "descData": {
+    "emoji": {}
+  },
+  "closed": false,
+  "idOrganization": null,
+  "idEnterprise": null,
+  "pinned": false,
+  "url": "https://trello.com/b/DBMd2vHR/newnamehw7",
+  "shortUrl": "https://trello.com/b/DBMd2vHR",
+  "prefs": {
+    "permissionLevel": "private",
+    "hideVotes": false,
+    "voting": "disabled",
+    "comments": "members",
+    "invitations": "members",
+    "selfJoin": true,
+    "cardCovers": true,
+    "isTemplate": false,
+    "cardAging": "regular",
+    "calendarFeedEnabled": false,
+    "background": "blue",
+    "backgroundImage": null,
+    "backgroundImageScaled": null,
+    "backgroundTile": false,
+    "backgroundBrightness": "dark",
+    "backgroundColor": "#0079BF",
+    "backgroundBottomColor": "#0079BF",
+    "backgroundTopColor": "#0079BF",
+    "canBePublic": true,
+    "canBeEnterprise": true,
+    "canBeOrg": true,
+    "canBePrivate": true,
+    "canInvite": true
+  },
+  "labelNames": {
+    "green": "",
+    "yellow": "",
+    "orange": "",
+    "red": "",
+    "purple": "",
+    "blue": "",
+    "sky": "",
+    "lime": "",
+    "pink": "",
+    "black": ""
+  }
+}

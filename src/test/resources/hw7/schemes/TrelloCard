@@ -1,0 +1,64 @@
+{
+  "id": "5f4bb8102fffa751da9da7a1",
+  "checkItemStates": [],
+  "closed": false,
+  "dateLastActivity": "2020-08-30T14:30:40.288Z",
+  "desc": "",
+  "descData": {
+    "emoji": {}
+  },
+  "dueReminder": null,
+  "idBoard": "5f4bb1fb7555334d0653b896",
+  "idList": "5f4bb5665e82d71a1a9ff1cc",
+  "idMembersVoted": [],
+  "idShort": 1,
+  "idAttachmentCover": null,
+  "idLabels": [],
+  "manualCoverAttachment": false,
+  "name": "New card",
+  "pos": 16384,
+  "shortLink": "ZOiCkKTM",
+  "isTemplate": false,
+  "dueComplete": false,
+  "due": null,
+  "email": null,
+  "labels": [],
+  "shortUrl": "https://trello.com/c/ZOiCkKTM",
+  "start": null,
+  "url": "https://trello.com/c/ZOiCkKTM/1-new-card",
+  "cover": {
+    "idAttachment": null,
+    "color": null,
+    "idUploadedBackground": null,
+    "size": "normal",
+    "brightness": "light"
+  },
+  "idMembers": [],
+  "badges": {
+    "attachmentsByType": {
+      "trello": {
+        "board": 0,
+        "card": 0
+      }
+    },
+    "location": false,
+    "votes": 0,
+    "viewingMemberVoted": false,
+    "subscribed": false,
+    "fogbugz": "",
+    "checkItems": 0,
+    "checkItemsChecked": 0,
+    "checkItemsEarliestDue": null,
+    "comments": 0,
+    "attachments": 0,
+    "description": false,
+    "due": null,
+    "dueComplete": false,
+    "start": null
+  },
+  "subscribed": false,
+  "idChecklists": [],
+  "attachments": [],
+  "stickers": [],
+  "limits": {}
+}
