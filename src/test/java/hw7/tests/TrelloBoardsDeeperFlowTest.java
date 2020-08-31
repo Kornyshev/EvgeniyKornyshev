@@ -24,11 +24,14 @@ public class TrelloBoardsDeeperFlowTest extends AbstractTest {
     @Test(priority = 2, dataProvider = "boardsIDs", dataProviderClass = TestData.class)
     @Description("Checking that we can change name of every board")
     public void testBoardsNamesUpdating(String id) {
+        /*
+        WRONG TEST
+         */
         String oldName = getBoardByID(id).getName();
         String newName = oldName + "-UPDATED";
         TrelloBoardWithUpdates board = updateBoardNameByID(id, newName);
         assertThat("Assert that created board's name is equal to expected param",
-                board.getName(), equalTo(newName));
+                board.getName(), equalTo(newName + "WRONG!!!"));
     }
 
     @Test(priority = 2, dataProvider = "boardsIDs", dataProviderClass = TestData.class)

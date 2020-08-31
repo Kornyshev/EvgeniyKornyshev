@@ -5,15 +5,22 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import hw7.data.ApiEndpoints;
 import hw7.data.ApiParameters;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
+import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.hamcrest.Matchers.lessThan;
 
 public class TrelloInteractionApi {
 
@@ -115,13 +122,17 @@ public class TrelloInteractionApi {
                 .queryParams(parameters)
                 .log().everything()
                 .request(method, baseUri + endpoint.value() + entityId + additionalEndpoint)
-                .prettyPeek();
+                .then()
+                .assertThat()
+                .spec(goodResponse())
+                .extract().response();
     }
 
     public static RequestSpecification requestSpecification() {
         return new RequestSpecBuilder()
                 .addHeader("Content-Type", "text/html; charset=UTF-8")
                 .addQueryParam("requestNumber", ++requestNumber)
+                .addFilter(new AllureRestAssured())
                 .build();
     }
 
@@ -153,5 +164,13 @@ public class TrelloInteractionApi {
         return new Gson().fromJson(response.asString().trim(),
                 new TypeToken<TrelloCard>() {
                 }.getType());
+    }
+
+    public static ResponseSpecification goodResponse() {
+        return new ResponseSpecBuilder()
+                .expectStatusCode(HttpStatus.SC_OK)
+                .expectContentType(ContentType.JSON)
+                .expectResponseTime(lessThan(10000L))
+                .build();
     }
 }
