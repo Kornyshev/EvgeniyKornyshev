@@ -19,7 +19,6 @@
         <!--        Allure-->
         <allure.version>2.13.5</allure.version>
         <aspectj.version>1.8.10</aspectj.version>
-        <slf4j-simple.version>1.7.30</slf4j-simple.version>
         <allure-maven.version>2.10.0</allure-maven.version>
 
         <!--        TestNG, Cucumber and so on-->
@@ -27,13 +26,23 @@
         <cucumber-java.version>5.7.0</cucumber-java.version>
         <assertj-core.version>3.16.1</assertj-core.version>
         <hamcrest.version>2.2</hamcrest.version>
-        
+
         <!--        Selenium and so on-->
         <selenium-java.version>3.141.59</selenium-java.version>
         <webdrivermanager.version>4.1.0</webdrivermanager.version>
 
+        <!--        Some tools-->
+        <gson.version>2.8.6</gson.version>
+        <commons-io.version>2.7</commons-io.version>
+        <slf4j-simple.version>1.7.30</slf4j-simple.version>
+
+        <!--        JDI-->
+        <jdi-light-html.version>1.2.18</jdi-light-html.version>
+
+        <!--        Homework XMLs-->
         <hw4-xml-file>src/test/resources/hw4.xml</hw4-xml-file>
         <hw5-xml-file>src/test/resources/hw5.xml</hw5-xml-file>
+        <hw8-xml-file>src/test/resources/hw8.xml</hw8-xml-file>
     </properties>
 
     <dependencies>
@@ -81,6 +90,7 @@
             <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
@@ -97,22 +107,32 @@
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>${jdi-light-html.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-<!--            Surefire with Allure-->
+            <!--            Surefire with Allure-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <skip>true</skip>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${hw4-xml-file}</suiteXmlFile>
+                        <suiteXmlFile>${hw8-xml-file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
@@ -125,13 +145,12 @@
                 </dependencies>
             </plugin>
 
-<!--            CheckStyle Plugin-->
+            <!--            CheckStyle Plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
-                    <skip>true</skip>
                     <configLocation>
                         https://raw.githubusercontent.com/shoggy/epam-ru-pet-ta-2020-notes/master/checkstyle_config.xml
                     </configLocation>
@@ -139,6 +158,7 @@
                     <consoleOutput>true</consoleOutput>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <violationSeverity>warning</violationSeverity>
+                    <excludes>hw5\tests\steps\**</excludes>
                 </configuration>
                 <executions>
                     <execution>
@@ -151,12 +171,13 @@
                 </executions>
             </plugin>
 
-<!--            Failsafe-->
+            <!--            Failsafe-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven-failsafe-plugin.version}</version>
                 <configuration>
+                    <skip>true</skip>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
@@ -184,7 +205,8 @@
                 </executions>
             </plugin>
 
-<!--            Allure-Report-->
+            <!--            Allure-Report-->
+            <!--
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
@@ -202,19 +224,19 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
         </plugins>
     </build>
 
     <profiles>
         <profile>
-            <id>hw5</id>
+            <id>hw8</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
     </profiles>
 
-<!--
     <reporting>
         <excludeDefaults>true</excludeDefaults>
         <plugins>
@@ -228,5 +250,4 @@
             </plugin>
         </plugins>
     </reporting>
--->
 </project>
