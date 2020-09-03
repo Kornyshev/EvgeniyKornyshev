@@ -1,4 +1,6 @@
 package hw8.pages;
 
-public class MainPage {
+import com.epam.jdi.light.elements.composite.WebPage;
+
+public class MainPage extends WebPage {
 }

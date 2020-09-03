@@ -1,4 +1,6 @@
 package hw8.pages;
 
-public class ContactPage {
+import com.epam.jdi.light.elements.composite.WebPage;
+
+public class ContactPage extends WebPage {
 }

@@ -37,7 +37,7 @@
         <slf4j-simple.version>1.7.30</slf4j-simple.version>
 
         <!--        JDI-->
-        <jdi-light-html.version>1.2.18</jdi-light-html.version>
+        <jdi-light-html.version>1.2.17</jdi-light-html.version>
 
         <!--        Homework XMLs-->
         <hw4-xml-file>src/test/resources/hw4.xml</hw4-xml-file>
@@ -204,6 +204,30 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!--            jsonschema2pojo-->
+            <!--
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>1.0.2</version>
+                <configuration>
+                    <sourceDirectory>${basedir}/src/test/resources/hw8</sourceDirectory>
+                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                    <targetPackage>beans</targetPackage>
+                    <addCompileSourceRoot>true</addCompileSourceRoot>
+                    <sourceType>json</sourceType>
+                    <annotationStyle>gson</annotationStyle>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
 
             <!--            Allure-Report-->
             <!--

@@ -1,4 +1,22 @@
 package hw8.tests;
 
-abstract class CommonConditions {
+import hw8.pages.JdiSite;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
+
+interface CommonConditions {
+
+    @BeforeSuite(alwaysRun = true)
+    static void settingUp() {
+        initSite(JdiSite.class);
+        JdiSite.mainPage.open();
+    }
+
+    @AfterSuite(alwaysRun = true)
+    static void tearDown() {
+        killAllSeleniumDrivers();
+    }
 }
