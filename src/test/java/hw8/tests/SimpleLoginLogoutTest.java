@@ -2,6 +2,7 @@ package hw8.tests;
 
 import hw8.data.UserContainer;
 import hw8.data.entities.User;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
 import static hw8.pages.JdiSite.*;
@@ -9,7 +10,8 @@ import static hw8.tests.steps.Steps.shouldBeLoggedIn;
 import static hw8.tests.steps.Steps.shouldBeLoggedOut;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 
-public class SubmitContactFormTest implements CommonConditions {
+@Story("Just simple Login and Logout story")
+public class SimpleLoginLogoutTest implements CommonConditions {
 
     @Test(priority = 0)
     public void testHomePageOpening() {

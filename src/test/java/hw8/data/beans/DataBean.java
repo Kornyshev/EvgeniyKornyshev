@@ -4,16 +4,6 @@ import java.util.Arrays;
 
 public class DataBean {
 
-    /*
-    "data_1": {
-        "summary": [1,2],
-        "elements": ["Water", "Fire"],
-        "color": "Red",
-        "metals": "Gold",
-        "vegetables": ["Cucumber"]
-     }
-     */
-
     private int[] summary;
     private String[] elements;
     private String color;
@@ -71,12 +61,12 @@ public class DataBean {
 
     @Override
     public String toString() {
-        return "DataBean{" +
-                "summary=" + Arrays.toString(summary) +
-                ", elements=" + Arrays.toString(elements) +
-                ", color='" + color + '\'' +
-                ", metals='" + metals + '\'' +
-                ", vegetables=" + Arrays.toString(vegetables) +
-                '}';
+        return "DataBean{"
+                + "summary=" + Arrays.toString(summary)
+                + ", elements=" + Arrays.toString(elements)
+                + ", color='" + color + '\''
+                + ", metals='" + metals + '\''
+                + ", vegetables=" + Arrays.toString(vegetables)
+                + '}';
     }
 }

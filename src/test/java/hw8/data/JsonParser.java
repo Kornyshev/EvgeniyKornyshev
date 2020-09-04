@@ -19,7 +19,9 @@ public class JsonParser {
             file = FileUtils.readFileToString(
                     new File("src/test/resources/hw8/metalsColorsDataSet.json"),
                     StandardCharsets.UTF_8);
-        } catch (IOException ignored) { }
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
         DataContainer bean = new Gson().fromJson(file, DataContainer.class);
         return Arrays.asList(bean.data_1, bean.data_2, bean.data_3, bean.data_4, bean.data_5);
     }
