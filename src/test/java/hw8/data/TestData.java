@@ -12,4 +12,11 @@ public class TestData {
                 .map(bean -> new DataBean[]{bean})
                 .toArray(Object[][]::new);
     }
+
+    @DataProvider(name = "Results")
+    public Object[][] getResultsStrings() {
+        return new Object[][] {
+                {"Summary: ", "Elements: ", "Color: ", "Metal: ", "Vegetables: "}
+        };
+    }
 }

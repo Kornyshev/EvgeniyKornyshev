@@ -6,6 +6,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static hw8.pages.JdiSite.mainPage;
 
@@ -16,20 +17,20 @@ interface CommonConditions {
         initSite(JdiSite.class);
     }
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     static void beforeClass() {
         mainPage.open();
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     static void afterClass() {
         if (!mainPage.isOpened()) {
-            //mainPage.open();
+            mainPage.open();
         }
     }
 
     @AfterSuite(alwaysRun = true)
     static void tearDown() {
-        //killAllSeleniumDrivers();
+        killAllSeleniumDrivers();
     }
 }

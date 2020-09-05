@@ -59,6 +59,22 @@ public class DataBean {
         this.vegetables = vegetables;
     }
 
+    public String getElementsInOneString() {
+        StringBuilder res = new StringBuilder();
+        for (String element : elements) {
+            res.append(element).append(", ");
+        }
+        return res.substring(0, res.length() - 2);
+    }
+
+    public String getVegetablesInOneString() {
+        StringBuilder res = new StringBuilder();
+        for (String v : vegetables) {
+            res.append(v).append(", ");
+        }
+        return res.substring(0, res.length() - 2);
+    }
+
     @Override
     public String toString() {
         return "DataBean{"

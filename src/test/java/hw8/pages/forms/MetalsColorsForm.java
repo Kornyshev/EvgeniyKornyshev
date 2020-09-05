@@ -6,8 +6,9 @@ import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
-import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import hw8.data.beans.DataBean;
+import hw8.pages.custom.MultiDropdown;
 
 
 public class MetalsColorsForm extends Form<DataBean> {
@@ -32,17 +33,15 @@ public class MetalsColorsForm extends Form<DataBean> {
             expand = ".caret")
     public Dropdown metals;
 
-    /*
-    This element does not work yet. I can't initialize it correctly,
-    JDI requires <select> tag for that Element type
-     */
-    //@Css("div[ui='droplist']")
     @JDropdown(
             root = "div[ui='droplist']",
             value = "label",
             list = "li",
             expand = ".caret")
-    public MultiSelector vegetables;
+    public MultiDropdown vegetables;
+
+    @Css("button#submit-button")
+    public Button submit;
 
     @Override
     public void fill(DataBean entity) {
@@ -60,6 +59,7 @@ public class MetalsColorsForm extends Form<DataBean> {
         }
         colors.select(entity.getColor());
         metals.select(entity.getMetals());
+        vegetables.select(vegetables.selected());
         for (String vegetable : entity.getVegetables()) {
             vegetables.select(vegetable);
         }
