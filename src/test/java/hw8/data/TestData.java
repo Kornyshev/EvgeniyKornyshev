@@ -5,7 +5,7 @@ import org.testng.annotations.DataProvider;
 
 public class TestData {
 
-    @DataProvider(name = "MetalsAndColors")
+    @DataProvider(parallel = true, name = "MetalsAndColors")
     public Object[][] getData() {
         return JsonParser.testDataBeans()
                 .stream()

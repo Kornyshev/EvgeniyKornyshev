@@ -10,6 +10,8 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import hw8.data.beans.DataBean;
 import hw8.pages.custom.MultiDropdown;
 
+import java.util.Arrays;
+
 
 public class MetalsColorsForm extends Form<DataBean> {
 
@@ -52,8 +54,7 @@ public class MetalsColorsForm extends Form<DataBean> {
             }
         }
         for (Label element : elements) {
-            if (element.getText().equals(entity.getElements()[0])
-                    || element.getText().equals(entity.getElements()[1])) {
+            if (Arrays.asList(entity.getElements()).contains(element.getText())) {
                 element.click();
             }
         }

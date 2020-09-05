@@ -18,9 +18,9 @@ import static org.hamcrest.Matchers.equalToIgnoringCase;
 public class SubmitMetalsColorsFormTest implements CommonConditions {
 
     public static final String METALS_COLORS = "Metals & Colors";
-    public static final int EXPECTED_LOG_SIZE = 7;
     public static final int EXPECTED_RESULTS_SIZE = 5;
     private DataBean dataBean;
+    //private DataBean dataBean = JsonParser.testDataBeans().get(4);
 
     public SubmitMetalsColorsFormTest(DataBean dataBean) {
         this.dataBean = dataBean;
@@ -55,8 +55,16 @@ public class SubmitMetalsColorsFormTest implements CommonConditions {
     @Test(priority = 4)
     public void testMetalColorFormSubmitted() {
         metalsColorsPage.form.submit();
+        int expectedLogSize =
+                dataBean.getSummary().length + dataBean.getElements().length + 3;
+        /*
+        I use number 3 in expectedLogSize because we should calculate all interactions with form
+        and logs for each interaction (except Vegetables dropdown). So, we have 2 interaction from Summary[],
+        Elements[] array's size and additionally for exactly one interaction with
+        Color, Metal dropdowns and for Form submitting. So, us result - exactly three additional log strings.
+         */
         metalsColorsPage.logsList
-                .assertThat().size(EXPECTED_LOG_SIZE);
+                .assertThat().size(expectedLogSize);
         metalsColorsPage.resultsList
                 .assertThat().size(EXPECTED_RESULTS_SIZE);
     }
