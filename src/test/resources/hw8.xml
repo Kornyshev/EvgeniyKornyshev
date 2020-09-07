@@ -3,8 +3,7 @@
 <suite name="All Test Suite">
     <test verbose="2" name="Homework 8 - JDI Magic">
         <classes>
-            <class name="hw8.tests.SimpleLoginLogoutTest"/>
-            <class name="hw8.tests.SubmitMetalsColorsFormFactory"/>
+            <class name="hw8.tests.SubmitMetalsColorsFormTest"/>
         </classes>
     </test>
 </suite>

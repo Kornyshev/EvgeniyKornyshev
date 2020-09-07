@@ -12,7 +12,6 @@ import hw8.pages.custom.MultiDropdown;
 
 import java.util.Arrays;
 
-
 public class MetalsColorsForm extends Form<DataBean> {
 
     @Css("#summary-block .info-panel-section label")

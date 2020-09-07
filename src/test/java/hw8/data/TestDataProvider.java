@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import hw8.data.beans.DataBean;
 import hw8.data.beans.DataContainer;
 import org.apache.commons.io.FileUtils;
+import org.testng.annotations.DataProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +12,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
-public class JsonParser {
+public class TestDataProvider {
+
+    @DataProvider(name = "MetalsAndColors")
+    public Object[][] getData() {
+        return testDataBeans()
+                .stream()
+                .map(bean -> new DataBean[]{bean})
+                .toArray(Object[][]::new);
+    }
 
     public static List<DataBean> testDataBeans() {
         String file = null;

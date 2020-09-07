@@ -151,7 +151,7 @@
                     <consoleOutput>true</consoleOutput>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <violationSeverity>warning</violationSeverity>
-                    <excludes>hw5\tests\steps\**, hw8\data\beans\**</excludes>
+                    <excludes>hw5\tests\steps\**, hw8\data\beans\**, hw8\pages\custom\**</excludes>
                 </configuration>
                 <executions>
                     <execution>

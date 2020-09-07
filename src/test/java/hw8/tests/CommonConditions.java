@@ -1,9 +1,7 @@
 package hw8.tests;
 
 import hw8.pages.JdiSite;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
@@ -15,18 +13,7 @@ interface CommonConditions {
     @BeforeSuite(alwaysRun = true)
     static void settingUp() {
         initSite(JdiSite.class);
-    }
-
-    @BeforeClass(alwaysRun = true)
-    static void beforeClass() {
         mainPage.open();
-    }
-
-    @AfterClass(alwaysRun = true)
-    static void afterClass() {
-        if (!mainPage.isOpened()) {
-            mainPage.open();
-        }
     }
 
     @AfterSuite(alwaysRun = true)
