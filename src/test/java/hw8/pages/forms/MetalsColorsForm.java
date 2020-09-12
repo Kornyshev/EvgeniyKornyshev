@@ -7,12 +7,11 @@ import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import hw8.data.beans.DataBean;
-import hw8.pages.custom.MultiDropdown;
+import hw8.data.beans.MetalsAndColorsData;
 
 import java.util.Arrays;
 
-public class MetalsColorsForm extends Form<DataBean> {
+public class MetalsColorsForm extends Form<MetalsAndColorsData> {
 
     @Css("#summary-block .info-panel-section label")
     public JList<Label> summary;
@@ -34,18 +33,17 @@ public class MetalsColorsForm extends Form<DataBean> {
             expand = ".caret")
     public Dropdown metals;
 
-    @JDropdown(
-            root = "div[ui='droplist']",
-            value = "label",
+    @JDropdown(root = "#vegetables",
+            value = "#salad-dropdown > button",
             list = "li",
             expand = ".caret")
-    public MultiDropdown vegetables;
+    public static Dropdown vegetables;
 
     @Css("button#submit-button")
     public Button submit;
 
     @Override
-    public void fill(DataBean entity) {
+    public void fill(MetalsAndColorsData entity) {
         for (Label radio : summary) {
             if (radio.getText().equals(String.valueOf(entity.getSummary()[0]))
                     || radio.getText().equals(String.valueOf(entity.getSummary()[1]))) {
