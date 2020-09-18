@@ -1,0 +1,668 @@
+{
+	"info": {
+		"_postman_id": "07bbc50d-d160-47fa-a61f-e6f882c8e30d",
+		"name": "Homework 6",
+		"description": "This is Postman collection for Homework 6. I gonna make some requests chains for learning purpose to Yandex Speller API and GitHub API (depend on free time) using dummy account.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GitHub test",
+			"item": [
+				{
+					"name": "Simple GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "71c88497-897d-4443-b3f3-fcf78dd21ee2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/user/repos",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Hello-World repo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e286376-5999-4695-9b5a-50e248b37442",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Repo name\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"Hello-World\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{hello}}\",\r\n  \"description\": \"This is your first repository\",\r\n  \"homepage\": \"https://github.com\",\r\n  \"private\": false,\r\n  \"has_issues\": true,\r\n  \"has_projects\": true,\r\n  \"has_wiki\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.github.com/user/repos",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Hello-World repo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c6919e1a-d125-4fc5-a222-e2917c75936d",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/repos/:owner/:repo",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"repos",
+								":owner",
+								":repo"
+							],
+							"variable": [
+								{
+									"key": "owner",
+									"value": "{{username}}"
+								},
+								{
+									"key": "repo",
+									"value": "{{hello}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Random repo Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "42d9b591-ae0e-4b76-ac44-1592b3c45127",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Repo name\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(pm.environment.get(\"repo\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a8a8a5ad-68b1-4f3c-b11a-8adf7759277d",
+								"exec": [
+									"var rnd = Math.random().toString(36).substring(2);\r",
+									"var repo = \"My-repo-\" + rnd;\r",
+									"\r",
+									"pm.environment.set(\"repo\", repo);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{repo}}\",\r\n  \"description\": \"This is your first repository\",\r\n  \"homepage\": \"https://github.com\",\r\n  \"private\": false,\r\n  \"has_issues\": true,\r\n  \"has_projects\": true,\r\n  \"has_wiki\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.github.com/user/repos",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all repos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fe7af737-bde3-4495-8099-6866f9236f54",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Repo name\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].name).to.eql(pm.environment.get(\"repo\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/user/repos",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete created Random repo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "288ebc53-8822-411a-afda-2ad19a88cbae",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0cd732b6-9974-4493-86a8-b948f24aca5e",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/repos/:owner/:repo",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"repos",
+								":owner",
+								":repo"
+							],
+							"variable": [
+								{
+									"key": "owner",
+									"value": "{{username}}"
+								},
+								{
+									"key": "repo",
+									"value": "{{repo}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Speller test",
+			"item": [
+				{
+					"name": "Example checkText from Docs",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://speller.yandex.net/services/spellservice.json/checkText?text=синхрафазатрон+в+дубне",
+							"protocol": "https",
+							"host": [
+								"speller",
+								"yandex",
+								"net"
+							],
+							"path": [
+								"services",
+								"spellservice.json",
+								"checkText"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "синхрафазатрон+в+дубне"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Example checkTexts from Docs",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://speller.yandex.net/services/spellservice.json/checkTexts?text=синхрафазатрон&text=в+дубне&text=som+enormos+mistekes&text=fdgdf5g4d654 sdf654sdf ss dsd 654654",
+							"protocol": "https",
+							"host": [
+								"speller",
+								"yandex",
+								"net"
+							],
+							"path": [
+								"services",
+								"spellservice.json",
+								"checkTexts"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "синхрафазатрон"
+								},
+								{
+									"key": "text",
+									"value": "в+дубне"
+								},
+								{
+									"key": "text",
+									"value": "som+enormos+mistekes"
+								},
+								{
+									"key": "text",
+									"value": "fdgdf5g4d654 sdf654sdf ss dsd 654654"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET with huge apropriate string",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b328fc9d-7bd0-4170-bc67-8e7cf5a50f00",
+								"exec": [
+									"var randomString = Math.random().toString(36).substring(2);\r",
+									"var bigString = randomString + \" \";\r",
+									"\r",
+									"for (let i = 0; i < 600; i++) {\r",
+									"    bigString = bigString + randomString + \" \";\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"bigString\", bigString);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "84b08924-4b7f-423c-b305-a079e83dda70",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Code API\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].code).to.eql(4);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://speller.yandex.net/services/spellservice.json/checkText?text={{bigString}}",
+							"protocol": "https",
+							"host": [
+								"speller",
+								"yandex",
+								"net"
+							],
+							"path": [
+								"services",
+								"spellservice.json",
+								"checkText"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "{{bigString}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET with russian text from Env var",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d0a27b31-d343-41d2-822f-13979e902036",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e4cbafb3-e365-48b3-b746-47c702a293e5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Code API\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].code).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Two mistakes in response\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(Object.keys(jsonData).length).to.eql(2);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://speller.yandex.net/services/spellservice.json/checkText?text={{incorrectRusTest}}",
+							"protocol": "https",
+							"host": [
+								"speller",
+								"yandex",
+								"net"
+							],
+							"path": [
+								"services",
+								"spellservice.json",
+								"checkText"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "{{incorrectRusTest}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a6268523-cf67-4b03-9d05-2b84c5b5f7c3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Code API - first param\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0][0].code).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Code API - second param\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[1][0].code).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://speller.yandex.net/services/spellservice.json/checkTexts?text=ашипка&text=другайа+ашибка",
+							"protocol": "https",
+							"host": [
+								"speller",
+								"yandex",
+								"net"
+							],
+							"path": [
+								"services",
+								"spellservice.json",
+								"checkTexts"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "ашипка"
+								},
+								{
+									"key": "text",
+									"value": "другайа+ашибка"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST request - fail!",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0395af17-bfed-416a-941c-dd476cf01813",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://speller.yandex.net/services/spellservice.json/checkText?text=текст",
+							"protocol": "https",
+							"host": [
+								"speller",
+								"yandex",
+								"net"
+							],
+							"path": [
+								"services",
+								"spellservice.json",
+								"checkText"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "текст"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d9cd041e-f4bc-4095-833d-717bafa1ec17",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c46ce1d4-2e33-444d-886c-af6be580d826",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
