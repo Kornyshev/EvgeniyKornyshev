@@ -1,0 +1,25 @@
+Scenarios for testing:
+
+Create and delete board
+    Create (create + check) POST /1/boards/ + key + token + name
+    Delete (delete + check) DELETE /1/boards/{id} + key + token
+
+Create board and update name and description
+    Create (create + check) POST /1/boards/ + key + token + name
+    Update name (update + assert) PUT /1/boards/{id} + key + token + name
+    Update description (update + assert) PUT /1/boards/{id} + key + token + desc
+    Delete that one (delete + check) DELETE /1/boards/{id} + key + token
+
+Create board and create some lists
+    Create (create + check) POST /1/boards/ + key + token + name
+    Create list (create + check) POST /1/lists + key + token + name + idBoard
+    Create list (create + check) POST /1/lists + key + token + name + idBoard
+    Create list (create + check) POST /1/lists + key + token + name + idBoard
+    Delete board (delete + check) DELETE /1/boards/{id} + key + token
+
+Create board, list and few cards
+    Create board (create + check) POST /1/boards/ + key + token + name
+    Create list (create + check) POST /1/lists + key + token + name + idBoard
+    Create cards (create + check) POST /1/cards + key + token + name + idList
+    Delete cards (delete + check) DELETE /1/cards/{id} + key + token
+    Delete board (create + check) DELETE /1/boards/{id} + key + token
