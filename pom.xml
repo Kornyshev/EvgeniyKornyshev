@@ -27,21 +27,13 @@
         <cucumber-java.version>5.7.0</cucumber-java.version>
         <assertj-core.version>3.16.1</assertj-core.version>
         <hamcrest.version>2.2</hamcrest.version>
-
+        
         <!--        Selenium and so on-->
         <selenium-java.version>3.141.59</selenium-java.version>
         <webdrivermanager.version>4.1.0</webdrivermanager.version>
 
-        <!--        Homeworks XMLs-->
         <hw4-xml-file>src/test/resources/hw4.xml</hw4-xml-file>
         <hw5-xml-file>src/test/resources/hw5.xml</hw5-xml-file>
-        <hw7-xml-file>src/test/resources/hw7.xml</hw7-xml-file>
-
-        <!--        API Homework-->
-        <rest-assured.version>4.2.0</rest-assured.version>
-        <gson.version>2.8.6</gson.version>
-        <lombok.version>1.18.12</lombok.version>
-        <allure-rest-assured.version>2.13.5</allure-rest-assured.version>
     </properties>
 
     <dependencies>
@@ -89,7 +81,6 @@
             <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
@@ -102,42 +93,26 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>${rest-assured.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>${gson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-rest-assured</artifactId>
-            <version>${allure-rest-assured.version}</version>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!--            Surefire with Allure-->
+<!--            Surefire with Allure-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
+                    <skip>true</skip>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${hw7-xml-file}</suiteXmlFile>
+                        <suiteXmlFile>${hw4-xml-file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
@@ -150,12 +125,13 @@
                 </dependencies>
             </plugin>
 
-            <!--            CheckStyle Plugin-->
+<!--            CheckStyle Plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
+                    <skip>true</skip>
                     <configLocation>
                         https://raw.githubusercontent.com/shoggy/epam-ru-pet-ta-2020-notes/master/checkstyle_config.xml
                     </configLocation>
@@ -163,7 +139,6 @@
                     <consoleOutput>true</consoleOutput>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <violationSeverity>warning</violationSeverity>
-                    <excludes>hw5\tests\steps\**, beans/**</excludes>
                 </configuration>
                 <executions>
                     <execution>
@@ -176,14 +151,12 @@
                 </executions>
             </plugin>
 
-            <!--            Failsafe-->
+<!--            Failsafe-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven-failsafe-plugin.version}</version>
                 <configuration>
-                    <!--                    Skip-->
-                    <skip>true</skip>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
@@ -211,30 +184,7 @@
                 </executions>
             </plugin>
 
-            <!--            jsonschema2pojo-->
-            <plugin>
-                <groupId>org.jsonschema2pojo</groupId>
-                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
-                <version>1.0.2</version>
-                <configuration>
-                    <sourceDirectory>${basedir}/src/test/resources/hw7/schemes</sourceDirectory>
-                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
-                    <targetPackage>beans</targetPackage>
-                    <addCompileSourceRoot>true</addCompileSourceRoot>
-                    <sourceType>json</sourceType>
-                    <annotationStyle>gson</annotationStyle>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!--            Allure-Report-->
-            <!--
+<!--            Allure-Report-->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
@@ -252,20 +202,19 @@
                     </execution>
                 </executions>
             </plugin>
-            -->
         </plugins>
     </build>
 
     <profiles>
         <profile>
-            <id>hw7</id>
+            <id>hw5</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
     </profiles>
 
-
+<!--
     <reporting>
         <excludeDefaults>true</excludeDefaults>
         <plugins>
@@ -279,5 +228,5 @@
             </plugin>
         </plugins>
     </reporting>
-
+-->
 </project>
