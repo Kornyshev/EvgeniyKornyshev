@@ -34,6 +34,9 @@
 
         <hw4-xml-file>src/test/resources/hw4.xml</hw4-xml-file>
         <hw5-xml-file>src/test/resources/hw5.xml</hw5-xml-file>
+        <hw7-xml-file>src/test/resources/hw7.xml</hw7-xml-file>
+        <hw8-xml-file>src/test/resources/hw8.xml</hw8-xml-file>
+        <commons-io.version>2.6</commons-io.version>
     </properties>
 
     <dependencies>
@@ -81,6 +84,7 @@
             <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
@@ -151,39 +155,6 @@
                 </executions>
             </plugin>
 
-<!--            Failsafe-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${maven-failsafe-plugin.version}</version>
-                <configuration>
-                    <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                    </argLine>
-                    <systemPropertyVariables>
-                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-                    </systemPropertyVariables>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>${hw5-xml-file}</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjweaver</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
 <!--            Allure-Report-->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
@@ -211,6 +182,50 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <build>
+                <plugins>
+                    <!--            Failsafe-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${maven-failsafe-plugin.version}</version>
+                        <configuration>
+                            <argLine>
+                                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                            </argLine>
+                            <systemPropertyVariables>
+                                <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                            </systemPropertyVariables>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>${hw5-xml-file}</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjweaver</artifactId>
+                                <version>${aspectj.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>hw7</id>
+        </profile>
+
+        <profile>
+            <id>hw8</id>
         </profile>
     </profiles>
 
