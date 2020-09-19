@@ -46,11 +46,8 @@ public class TrelloCardsFlowTests extends AbstractTest {
 
     @Test(priority = 3, dataProvider = "listsIDs", dataProviderClass = TestData.class)
     public void testCardsQuantityInEachList(String id) {
-        /*
-        WRONG TEST
-         */
         assertThat("Assert that every lists contains necessary quantity of cards",
-                getCardsFromList(id).size(), equalTo(ENTITIES_COUNT + 1));
+                getCardsFromList(id).size(), equalTo(ENTITIES_COUNT));
     }
 
     @Test(priority = 4, dataProvider = "cardsIDs", dataProviderClass = TestData.class)

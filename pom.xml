@@ -27,16 +27,26 @@
         <cucumber-java.version>5.7.0</cucumber-java.version>
         <assertj-core.version>3.16.1</assertj-core.version>
         <hamcrest.version>2.2</hamcrest.version>
-        
+
         <!--        Selenium and so on-->
         <selenium-java.version>3.141.59</selenium-java.version>
         <webdrivermanager.version>4.1.0</webdrivermanager.version>
+        <commons-io.version>2.6</commons-io.version>
 
+        <!--        API homework-->
+        <rest-assured.version>4.2.0</rest-assured.version>
+        <gson.version>2.8.6</gson.version>
+        <lombok.version>1.18.12</lombok.version>
+        <allure-rest-assured.version>2.13.5</allure-rest-assured.version>
+
+        <!--        JDI-->
+        <jdi-light-html.version>1.2.17</jdi-light-html.version>
+
+        <!--        Homeworks XMLs-->
         <hw4-xml-file>src/test/resources/hw4.xml</hw4-xml-file>
         <hw5-xml-file>src/test/resources/hw5.xml</hw5-xml-file>
         <hw7-xml-file>src/test/resources/hw7.xml</hw7-xml-file>
         <hw8-xml-file>src/test/resources/hw8.xml</hw8-xml-file>
-        <commons-io.version>2.6</commons-io.version>
     </properties>
 
     <dependencies>
@@ -101,23 +111,47 @@
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>${jdi-light-html.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-rest-assured</artifactId>
+            <version>${allure-rest-assured.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-<!--            Surefire with Allure-->
+            <!--            Surefire with Allure-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <skip>true</skip>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>${hw4-xml-file}</suiteXmlFile>
-                    </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
                 <dependencies>
@@ -129,13 +163,12 @@
                 </dependencies>
             </plugin>
 
-<!--            CheckStyle Plugin-->
+            <!--            CheckStyle Plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
-                    <skip>true</skip>
                     <configLocation>
                         https://raw.githubusercontent.com/shoggy/epam-ru-pet-ta-2020-notes/master/checkstyle_config.xml
                     </configLocation>
@@ -155,7 +188,7 @@
                 </executions>
             </plugin>
 
-<!--            Allure-Report-->
+            <!--            Allure-Report-->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
@@ -194,7 +227,8 @@
                                 -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                             </argLine>
                             <systemPropertyVariables>
-                                <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                                <allure.results.directory>${project.build.directory}/allure-results
+                                </allure.results.directory>
                             </systemPropertyVariables>
                             <suiteXmlFiles>
                                 <suiteXmlFile>${hw5-xml-file}</suiteXmlFile>
@@ -222,14 +256,41 @@
 
         <profile>
             <id>hw7</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${maven-surefire-plugin.version}</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>${hw7-xml-file}</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
 
         <profile>
             <id>hw8</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${maven-surefire-plugin.version}</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>${hw8-xml-file}</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 
-<!--
     <reporting>
         <excludeDefaults>true</excludeDefaults>
         <plugins>
@@ -243,5 +304,4 @@
             </plugin>
         </plugins>
     </reporting>
--->
 </project>
