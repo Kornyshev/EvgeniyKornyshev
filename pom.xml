@@ -31,7 +31,7 @@
         <!--        Selenium and so on-->
         <selenium-java.version>3.141.59</selenium-java.version>
         <webdrivermanager.version>4.1.0</webdrivermanager.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
 
         <!--        API homework-->
         <rest-assured.version>4.2.0</rest-assured.version>
